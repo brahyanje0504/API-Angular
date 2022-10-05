@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { PersonasRoutingModule } from './personas-routing.module';
 import { ListaComponent } from './lista/lista.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { ListaComponent } from './lista/lista.component';
   ],
   imports: [
     CommonModule,
-    PersonasRoutingModule
+    PersonasRoutingModule,
+    NzTableModule,
+    NzDividerModule
   ]
 })
 export class PersonasModule { }
