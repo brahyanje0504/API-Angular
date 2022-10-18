@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { observable } from 'rxjs';
 import { Person } from 'src/app/models/models';
 import { ServicesService } from 'src/app/services/services.service';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'app-lista',
@@ -10,7 +12,7 @@ import { ServicesService } from 'src/app/services/services.service';
 })
 export class ListaComponent implements OnInit {
 
-  constructor(private services: ServicesService) { }
+  constructor(private services: ServicesService, private modalService: NzModalService) { }
 
   ngOnInit(): void {
     this.traerPersonas()
@@ -30,8 +32,11 @@ export class ListaComponent implements OnInit {
     alert(`Hola ${nombre}`)
   }
 
-  agregar(){
-    
+  add(){
+    this.modalService.create({
+      nzTitle: 'Modal Title',
+      nzContent: FormComponent
+    });
   }
 
 }

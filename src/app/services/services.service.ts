@@ -11,11 +11,11 @@ export class ServicesService {
   constructor(private http: HttpClient) { }
 
   TraerPersonas(): Observable<HttpResponse<Person[]>>{
-    return this.http.get<Person[]>("http://localhost:3000/personas", {observe: 'response'})
+    return this.http.get<Person[]>("http://localhost:3000/mostrar", {observe: 'response'})
   }
 
   TraerPersona(id: string): Observable<HttpResponse<Person[]>>{
-    return this.http.get<Person[]>(`http://localhost:3000/personas/${id}`, {observe: 'response'})
+    return this.http.get<Person[]>(`http://localhost:3000/mostrar/${id}`, {observe: 'response'})
   }
 }
 
