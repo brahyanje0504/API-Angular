@@ -11,8 +11,14 @@ export class FormComponent implements OnInit {
 
   constructor(private modal: NzModalRef, private fb: UntypedFormBuilder) {}
 
-  destroyModal(): void {
+  cancelar(): void {
     this.modal.destroy();
+    alert("cancelado")
+  }
+
+  guardar(): void {
+    this.modal.destroy();
+    alert("guardado")
   }
 
   validateForm!: UntypedFormGroup;
