@@ -4,7 +4,6 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="lista.component.css">
-    <title>CSS con Brahyan</title>
   </head>
 
   <body>
@@ -14,18 +13,19 @@
     <div id="contenedorPersonas">
       
       <div id="personas">
-        <h1>Personas</h1>
+        <h1>Personas {{contador}}</h1>
       </div>
 
       <div id="boton">
-        <button nz-button nzType="primary" (click)="add()">Agregar </button>
+        <button nz-button nzType="primary" (click)="add(true, {})">Agregar </button>
+        <button nz-button nzType="primary" (click)="add2()">+1 </button>
       </div>
 
     </div>
 
     <br><br>
 
-    <nz-table #basicTable [nzData]="listOfData">
+    <nz-table #basicTable [nzData]="personas">
       <thead>
         <tr>
           <th>Key</th>
@@ -36,15 +36,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of listOfData">
-          <td>{{ data.key }}</td>
-          <td style="cursor: pointer;" (click)="saludar(data.name)">{{ data.name }}</td>
-          <td>{{ data.age }}</td>
-          <td>{{ data.address }}</td>
+        <tr *ngFor="let persona of personas">
+          <td>{{ persona.key }}</td>
+          <td>{{ persona.name }}</td>
+          <td>{{ persona.age }}</td>
+          <td>{{ persona.address }}</td>
           <td>
-            <a (click)="add()">Editar</a>
+            <a (click)="add(false, persona)">Editar</a>
             <nz-divider nzType="vertical"></nz-divider>
-            <a>Eliminar</a>
+            <a (click)="eliminar2(persona.key)">Eliminar</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a [routerLink]="['/mascotas', persona.key]">mascota</a>
+            
           </td>
         </tr>
       </tbody>

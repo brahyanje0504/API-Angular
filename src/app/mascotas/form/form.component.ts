@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { disableDebugTools } from '@angular/platform-browser';
 import { NzModalRef } from 'ng-zorro-antd/modal';
-import { Person } from 'src/app/models/models';
+import { Pet } from 'src/app/models/models';
 import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
@@ -13,27 +12,29 @@ import { ServicesService } from 'src/app/services/services.service';
 export class FormComponent implements OnInit {
 
   @Input() isCreated: boolean = false;
-  @Input() Key: number = 0;
+  @Input() Id: string = "";
+  @Input() Key: string = "";
   @Input() Name: string = "";
   @Input() Age: number = 0;
-  @Input() Address: string = "";
+  @Input() Raza: string = "";
 
   constructor(private modal: NzModalRef, private service: ServicesService, private fb: UntypedFormBuilder) { }
-
   validateForm!: UntypedFormGroup;
 
-  buildParameter():Person {
+  buildParameter():Pet {
     return {
-      key: this.validateForm.value.key,
+      propietario: this.Id,
+      id: this.Key,
       name: this.validateForm.value.name,
       age: parseInt(this.validateForm.value.age),
-      address: this.validateForm.value.address
-    } as Person
+      raza: this.validateForm.value.raza
+    } as Pet
   }
-  Aceptar(): void {
+
+  aceptar(): void {
     if (this.validateForm.valid) {
       if (this.isCreated == false){
-        this.service.EditarPersona(this.buildParameter()).subscribe(r=> {
+        this.service.EditarMascota(this.buildParameter(), this.Id).subscribe(r=> {
           
           if (r.status == 200)        {
             this.modal.destroy()
@@ -45,9 +46,8 @@ export class FormComponent implements OnInit {
           
         })
       } else {
-        this.service.GuardarPersona(this.buildParameter()).subscribe(r=> {
+        this.service.GuardarMascota(this.buildParameter()).subscribe(r=> {
         
-
           if (r.status == 200)        {
             this.modal.destroy()
             window.location.reload()
@@ -69,28 +69,25 @@ export class FormComponent implements OnInit {
       });
     }
   }
-  ngOnInit(): void {
 
-    if (this.isCreated){
-      this.validateForm = this.fb.group({
-        key: [null, [Validators.required]],
-        name: [null, [Validators.required]],
-        age: [null, [Validators.required]],
-        address: [null, [Validators.required]],
-      });
-    }else{
-      this.validateForm = this.fb.group({
-        key: [{value: this.Key, disabled: true}, [Validators.required]],
-        name: [this.Name, [Validators.required]],
-        age: [this.Age, [Validators.required]],
-        address: [this.Address, [Validators.required]],
-      });
-    }
-
-
-  }
   cancelar(): void {
     this.modal.destroy();
-    alert("cancelado")
   }
+
+  ngOnInit(): void {
+    if (this.isCreated){
+      this.validateForm = this.fb.group({
+        name: [null, [Validators.required]],
+        raza: [null, [Validators.required]],
+        age: [null, [Validators.required]],
+      });
+    }else{
+      this.validateForm = this.fb.group({       
+        name: [this.Name, [Validators.required]],
+        raza: [this.Raza, [Validators.required]],
+        age: [this.Age, [Validators.required]],
+      });
+    }
+  }
+
 }

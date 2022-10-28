@@ -1,0 +1,45 @@
+
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="lista.component.css">
+  </head>
+
+  <body>
+
+    <div id="contenedorPersonas">
+      <h1>Mascotas {{idPersona}}</h1>
+      <br>
+
+      <div id="boton">
+        <button nz-button nzType="primary" (click)="addPet(true, {})">Agregar </button>
+      </div>
+
+    </div>
+
+    <br><br>
+
+    <nz-table #basicTable [nzData]="mascotas">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Raza</th>
+            <th>Age</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mascota of mascotas">
+            <td>{{ mascota.name }}</td>
+            <td>{{ mascota.raza }}</td>
+            <td>{{ mascota.age }}</td>
+            <td>
+                <a (click)="addPet(false, mascota)">Editar</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a (click)="eliminarPet(mascota.id)">Eliminar</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+  </body>

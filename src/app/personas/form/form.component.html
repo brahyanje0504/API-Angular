@@ -1,28 +1,43 @@
-<div>
-    <form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
-        <nz-form-item>
-          <nz-form-control nzErrorTip="Please input your username!">
-            <nz-input-group nzPrefixIcon="user">
-              <input formControlName="userName" nz-input placeholder="Username" />
-            </nz-input-group>
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-          <nz-form-control nzErrorTip="Please input your Password!">
-            <nz-input-group nzPrefixIcon="lock">
-              <input formControlName="password" nz-input type="password" placeholder="Password" />
-            </nz-input-group>
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-          <nz-form-control>
-            <button nz-button nzType="primary" [disabled]="!validateForm.valid">Log in</button>
-          </nz-form-control>
-        </nz-form-item>
-      </form>
-  </div>
-  <div *nzModalFooter>
-    <button nz-button nzType="default" (click)="cancelar()">Cancelar</button>
-    <button nz-button nzType="primary" (click)="guardar()">Guardar</button>
-  </div>
+<!DOCTYPE html>
 
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="form.component.css">
+
+</head>
+
+<div>
+  <form id="formulario" nz-form [formGroup]="validateForm">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="key">Identificación</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid key!">
+        <input nz-input formControlName="key" id="key" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Nombre</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid name!">
+        <input nz-input formControlName="name" id="name" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="age">Edad</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid edad!">
+        <input nz-input formControlName="age" id="age" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="address">Direccion</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid direccion!">
+        <input nz-input formControlName="address" id="address" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="cancelar()">Cancelar</button>
+  <button nz-button nzType="primary" (click)="Aceptar()">Aceptar</button>
+</div>
